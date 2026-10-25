@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#173d2b">
+  <meta name="description" content="AgroVision crop yield prediction academic project dashboard.">
+  <title>AgroVision | Crop Yield Intelligence</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="#"><span class="brand-mark">A</span><span>Agro<span class="brand-light">Vision</span><small>AGRICULTURE INTELLIGENCE</small></span></a>
+    <div class="nav-label">WORKSPACE</div>
+    <button class="nav active" data-target="overview"><span>▦</span> Overview</button>
+    <button class="nav" data-target="predict"><span>⌁</span> Yield prediction</button>
+    <button class="nav" data-target="method"><span>◈</span> Model & methodology</button>
+    <div class="sidebar-bottom"><div class="status-dot"></div><div><b>Academic prototype</b><small>Validation in progress</small></div></div>
+  </aside>
+  <main class="main">
+    <header class="topbar"><div><span class="eyebrow">DATA SCIENCE / AGRICULTURE</span><h1 id="page-title">Crop intelligence, made clearer.</h1></div><div class="top-actions"><span class="pill"><i></i> Prototype environment</span><button id="settings-open" class="icon-btn" aria-label="API settings">⚙</button></div></header>
+    <section class="hero">
+      <div class="hero-copy"><div class="eyebrow light">AGROVISION PLATFORM</div><h2>Turn agricultural data<br>into <em>smarter insights.</em></h2><p>Explore crop-yield estimates using weather, soil and crop context. This academic prototype demonstrates the workflow from input data to model output.</p><button class="primary-btn" data-goto="predict">Explore prediction <span>↗</span></button></div>
+      <div class="hero-art" aria-hidden="true"><div class="sun"></div><div class="hill hill-back"></div><div class="hill hill-front"></div><div class="crop-row row-one"></div><div class="crop-row row-two"></div><div class="art-caption"><span>01</span> DATA-DRIVEN AGRICULTURE</div></div>
+    </section>
+    <div class="notice"><span class="notice-icon">i</span><div><b>Prototype / demo mode</b><p>Until you connect a trained model built from a real agricultural dataset, predictions use a simulated demo model and must not be used for farming decisions.</p></div><button id="notice-close" aria-label="Dismiss notice">×</button></div>
+    <section class="section-head"><div><span class="eyebrow">YOUR WORKSPACE</span><h2>Project overview</h2></div><span class="muted">Designed for academic evaluation</span></section>
+    <section class="stats-grid">
+      <article class="stat-card"><div class="stat-top"><span>Prediction workflow</span><span class="stat-icon">⌁</span></div><strong>Ready to test</strong><small>Inputs → model → estimate</small><div class="mini-line"><span style="width:78%"></span></div></article>
+      <article class="stat-card"><div class="stat-top"><span>Model status</span><span class="stat-icon">◈</span></div><strong id="model-status">Demo model</strong><small id="model-sub">Simulated training data</small><div class="status-text"><i></i> Not validated for real use</div></article>
+      <article class="stat-card"><div class="stat-top"><span>Evaluation metrics</span><span class="stat-icon">⌗</span></div><strong id="metrics-status">Not verified</strong><small>MAE · RMSE · R²</small><div class="status-text">Metrics appear after real training</div></article>
+    </section>
+    <section class="content-grid">
+      <article class="panel feature-panel"><div class="panel-head"><div><span class="eyebrow">PREDICTION STUDIO</span><h3>Estimate crop yield</h3></div><span class="round-icon">↗</span></div><p>Provide a few known conditions to run a sample prediction. The model output is expressed in tonnes per hectare.</p><div class="feature-chips"><span>Crop type</span><span>Rainfall</span><span>Temperature</span><span>Soil pH</span></div><button class="secondary-btn" data-goto="predict">Open prediction studio <span>→</span></button></article>
+      <article class="panel method-panel"><div class="panel-head"><div><span class="eyebrow">MODEL PIPELINE</span><h3>From data to insight</h3></div></div><div class="pipeline"><div><span>01</span><b>Prepare</b><small>Clean & validate records</small></div><div><span>02</span><b>Train</b><small>Fit regression models</small></div><div><span>03</span><b>Evaluate</b><small>Test unseen records</small></div><div><span>04</span><b>Predict</b><small>Estimate crop yield</small></div></div></article>
+    </section>
+    <section id="predict" class="prediction-section">
+      <div class="section-head"><div><span class="eyebrow">INTERACTIVE TOOL</span><h2>Yield prediction studio</h2><p class="muted">Enter plausible values. Actual accuracy depends on dataset coverage and validation.</p></div><span class="unit-tag">OUTPUT: TONNES / HECTARE</span></div>
+      <div class="predict-grid">
+        <form id="prediction-form" class="panel form-panel">
+          <div class="form-title"><span class="round-icon">⌁</span><div><h3>Field conditions</h3><p>Enter available agricultural inputs</p></div></div>
+          <label>Crop type<select id="crop" required><option value="Wheat">Wheat</option><option value="Rice">Rice</option><option value="Maize">Maize</option><option value="Cotton">Cotton</option><option value="Sugarcane">Sugarcane</option><option value="Pulses">Pulses</option></select></label>
+          <div class="two-col"><label>Rainfall <span>(mm)</span><input id="rainfall" type="number" min="0" max="5000" value="650" required></label><label>Temperature <span>(°C)</span><input id="temperature" type="number" min="-10" max="60" value="22" required></label></div>
+          <div class="two-col"><label>Soil pH <span>(0–14)</span><input id="soilph" type="number" min="0" max="14" step="0.1" value="6.5" required></label><label>Irrigation<select id="irrigation"><option value="1">Available</option><option value="0">Not available</option></select></label></div>
+          <label>API endpoint <span>(optional)</span><input id="api-url" type="url" placeholder="Paste deployed API URL, e.g. https://...onrender.com"></label>
+          <button class="primary-btn full-btn" type="submit">Run yield estimate <span>↗</span></button>
+          <p class="form-foot">No personal data is collected. API URL is saved only in this page session.</p>
+        </form>
+        <article class="panel result-panel" aria-live="polite">
+          <div class="result-top"><span class="eyebrow">MODEL OUTPUT</span><span id="result-badge" class="result-badge">DEMO</span></div>
+          <div id="result-placeholder" class="result-placeholder"><div class="result-symbol">↗</div><h3>Your estimate appears here</h3><p>Fill in the field conditions and run the model to view an output and interpretation.</p></div>
+          <div id="result-content" hidden><div class="result-number"><strong id="yield-value">—</strong><span>tonnes / hectare</span></div><div class="result-divider"></div><div class="result-detail"><span>Crop</span><b id="result-crop">—</b></div><div class="result-detail"><span>Model source</span><b id="result-source">—</b></div><div class="result-detail"><span>Input summary</span><b id="result-inputs">—</b></div><div class="interpretation"><b>Interpretation</b><p id="result-note"></p></div></div>
+          <div id="result-error" class="error-box" hidden></div>
+          <div class="result-bottom"><span class="status-dot"></span><span id="api-status">Demo mode · API not connected</span></div>
+        </article>
+      </div>
+    </section>
+    <section id="method" class="section-head methodology-head"><div><span class="eyebrow">TRANSPARENCY</span><h2>Model methodology</h2><p class="muted">A responsible prediction system reports what it knows—and what it does not.</p></div></section>
+    <section class="method-grid"><article class="panel"><span class="method-number">01 / DATA</span><h3>Dataset quality</h3><p>Use reliable crop-yield records with consistent units, regional coverage and clearly documented sources. Missing fields and outliers require review.</p></article><article class="panel"><span class="method-number">02 / MODEL</span><h3>Fair comparison</h3><p>Compare a baseline such as Linear Regression with tree-based models using the same held-out test data.</p></article><article class="panel"><span class="method-number">03 / VALIDATION</span><h3>Honest evaluation</h3><p>Report MAE, RMSE and R² only after evaluation on unseen real data. Random splits may overstate performance when records share locations or years.</p></article></section>
+    <footer><a class="brand footer-brand" href="#"><span class="brand-mark">A</span><span>AgroVision<small>SMARTER DATA. BETTER INSIGHTS.</small></span></a><span>Academic prototype · Crop Yield Prediction Using Data Science</span></footer>
+  </main>
+  <div id="toast" class="toast" role="status"></div>
+  <script src="app.js"></script>
+</body>
+</html>
